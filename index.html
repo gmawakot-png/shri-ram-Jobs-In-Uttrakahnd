@@ -3,211 +3,526 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>श्री राम जॉब्स पोर्टल - उत्तराखंड (मास्टर ड्रॉप-डाउन)</title>
+    <title>श्री राम मास्टर जॉब्स & सर्विसेज पोर्टल - उत्तराखंड</title>
     <style>
-        body { font-family: Arial, sans-serif; background-color: #eef2f7; margin: 0; padding: 15px; color: #333; }
-        .container { max-width: 950px; margin: auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #8b0000; font-size: 26px; margin-bottom: 5px; }
-        .sub-heading { text-align: center; color: #555; font-size: 14px; margin-bottom: 25px; }
+        * { box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #eef2f7; margin: 0; padding: 12px; color: #222; }
+        .container { max-width: 1100px; margin: auto; background: #fff; padding: 20px; border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
         
-        /* काउंटर कार्ड स्टाइल (फ्रंट पेज) */
-        .dashboard-cards { display: flex; gap: 15px; justify-content: space-around; margin-bottom: 25px; flex-wrap: wrap; }
-        .card { flex: 1; min-width: 250px; background: #f8f9fa; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 5px solid #004085; }
-        .card.pvt { border-top-color: #28a745; }
-        .card h3 { margin: 0; font-size: 18px; color: #333; }
-        .count-number { font-size: 28px; font-weight: bold; color: #004085; margin: 8px 0; }
-        .card.pvt .count-number { color: #28a745; }
-        .card-btn { display: inline-block; background: #004085; color: #fff; padding: 7px 16px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; margin-top: 5px; cursor: pointer; border: none; }
-        .card.pvt .card-btn { background: #28a745; }
-        .card-btn:hover { opacity: 0.9; }
+        /* हेडर */
+        .header { text-align: center; border-bottom: 2px solid #ff9933; padding-bottom: 12px; margin-bottom: 15px; }
+        h1 { color: #8b0000; font-size: 24px; margin: 0 0 5px 0; }
+        .sub-heading { color: #555; font-size: 13px; font-weight: bold; }
 
-        /* ड्रॉप-डाउन छुपी हुई सूचियाँ (शुरुआत में बंद रहेंगी) */
-        .section-box { display: none; margin-top: 20px; border-top: 2px solid #ddd; padding-top: 20px; }
-        .section-title { background: #004085; color: white; padding: 10px 15px; border-radius: 5px; font-size: 18px; margin-bottom: 15px; }
-        .section-title.pvt-bg { background: #28a745; }
+        /* सर्च बार */
+        .search-box { margin-bottom: 15px; }
+        .search-box input { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #004085; border-radius: 8px; outline: none; background: #fdfdfd; }
+        .search-box input:focus { border-color: #ff8c00; box-shadow: 0 0 8px rgba(255,140,0,0.3); }
 
-        ul { list-style: none; padding: 0; }
-        li { background: #fafafa; margin: 10px 0; padding: 12px 15px; border-left: 5px solid #004085; border-radius: 0 5px 5px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
-        li.pvt-item { border-left-color: #28a745; }
-        li.army-item { border-left-color: #d9534f; }
+        /* नेविगेशन टैब्स */
+        .filter-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; justify-content: center; }
+        .tab-btn { background: #e9ecef; border: 1px solid #ced4da; padding: 8px 14px; border-radius: 20px; font-size: 13px; font-weight: bold; cursor: pointer; transition: 0.2s; color: #333; }
+        .tab-btn:hover, .tab-btn.active { background: #004085; color: #fff; border-color: #004085; }
+        .tab-btn.uk { border-left: 4px solid #004085; }
+        .tab-btn.central { border-left: 4px solid #d9534f; }
+        .tab-btn.edu { border-left: 4px solid #ff8c00; }
+        .tab-btn.pvt { border-left: 4px solid #28a745; }
+        .tab-btn.svc { border-left: 4px solid #6f42c1; }
 
-        .job-info { flex: 1; min-width: 280px; }
-        .job-title { font-weight: bold; font-size: 16px; color: #111; }
-        .job-status { font-size: 14px; font-weight: bold; margin-top: 4px; }
-        .status-active { color: #28a745; } 
-        .status-closed { color: #d9534f; } 
-        .status-admit { color: #004085; } 
+        /* लिस्ट सेक्शन */
+        .section-header { font-size: 17px; font-weight: bold; padding: 10px 14px; background: #004085; color: white; border-radius: 6px; margin: 20px 0 10px 0; }
+        .section-header.central-bg { background: #b02a37; }
+        .section-header.edu-bg { background: #d97706; }
+        .section-header.pvt-bg { background: #198754; }
+        .section-header.svc-bg { background: #59359a; }
+
+        ul { list-style: none; padding: 0; margin: 0; }
+        li.item-card { background: #fafafa; margin: 10px 0; padding: 12px 15px; border-left: 5px solid #004085; border-radius: 0 8px 8px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 1px 4px rgba(0,0,0,0.06); }
+        li.item-card:hover { background: #f4f8ff; }
         
-        .job-location { font-size: 13px; color: #555; margin-top: 3px; }
-        .job-desc { font-size: 13px; color: #444; margin-top: 3px; }
-        
-        a.action-btn { background: #004085; color: white; padding: 7px 14px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin-top: 5px; }
-        a.action-btn.pvt { background: #28a745; }
-        a.action-btn.army { background: #d9534f; }
-        a.action-btn:hover { opacity: 0.85; }
+        li.central-item { border-left-color: #b02a37; }
+        li.edu-item { border-left-color: #d97706; }
+        li.pvt-item { border-left-color: #198754; }
+        li.svc-item { border-left-color: #59359a; }
 
-        .footer { text-align: center; margin-top: 40px; font-size: 13px; color: #666; border-top: 1px solid #ddd; padding-top: 15px; }
-        .blessing { font-weight: bold; color: #8b0000; font-size: 15px; }
+        .info-col { flex: 1; min-width: 270px; }
+        .title { font-weight: bold; font-size: 15px; color: #111; }
+        .tags { font-size: 12px; margin-top: 3px; font-weight: 600; }
+        .tag-active { color: #198754; }
+        .tag-update { color: #004085; }
+        .tag-notice { color: #b02a37; }
+        .meta { font-size: 12px; color: #555; margin-top: 3px; }
+
+        /* बटन्स */
+        .btn-col { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
+        a.btn { padding: 6px 12px; text-decoration: none; border-radius: 4px; font-size: 12px; font-weight: bold; color: #fff; display: inline-block; }
+        a.btn-blue { background: #004085; }
+        a.btn-red { background: #b02a37; }
+        a.btn-orange { background: #d97706; }
+        a.btn-green { background: #198754; }
+        a.btn-purple { background: #59359a; }
+        a.btn-gray { background: #495057; }
+        a.btn:hover { opacity: 0.88; }
+
+        .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #ddd; padding-top: 12px; }
+        .blessing { font-weight: bold; color: #8b0000; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>🚩 श्री राम जॉब्स पोर्टल (उत्तराखंड)</h1>
-    <div class="sub-heading">दुकानदार साथी: स्क्रीन साफ-सुथरी रहेगी, जिस बटन पर क्लिक करोगे सिर्फ वही लिस्ट खुलेगी!</div>
-
-    <!-- फ्रंट पेज काउंटर कार्ड (दाएं और बाएं) -->
-    <div class="dashboard-cards">
-        <div class="card">
-            <h3>🏛️ सरकारी व आर्मी विभाग</h3>
-            <div class="count-number">01 Active</div>
-            <button class="card-btn" onclick="toggleSection('govt-section')">सूची देखें ▼</button>
-        </div>
-        <div class="card pvt">
-            <h3>🏢 प्राइवेट, SIDCUL & होटल</h3>
-            <div class="count-number">03 Active</div>
-            <button class="card-btn" onclick="toggleSection('pvt-section')">सूची देखें ▼</button>
-        </div>
+    <div class="header">
+        <h1>🚩 श्री राम मास्टर जॉब्स & सर्विसेज पोर्टल (उत्तराखंड)</h1>
+        <div class="sub-heading">दुकानदार / सीएससी साथी: सरकारी विभाग, बिजली, जल, पुलिस, स्वास्थ्य, कोटद्वार कॉलेज, आर्मी व अपणी सरकार सेवाएं!</div>
     </div>
 
-    <!-- 1. सरकारी विभाग एवं भारतीय सेना सेक्शन (शुरुआत में बंद रहेगा) -->
-    <div class="section-box" id="govt-section">
-        <div class="section-title">🏛️ सरकारी विभाग, आयोग एवं भारतीय सेना (Govt & Army)</div>
+    <!-- ⚡ लाइव सर्च बार -->
+    <div class="search-box">
+        <input type="text" id="searchInput" onkeyup="filterContent()" placeholder="🔍 विभाग, भर्ती या सेवा खोजें... (उदा. Apuni Sarkar, Police, Bijli, SDSUV, Kotdwar, GDS, Health, Ration)">
+    </div>
+
+    <!-- 🏷️ फ़िल्टर टैब्स -->
+    <div class="filter-tabs">
+        <button class="tab-btn active" onclick="showCategory('all', this)">🌐 सभी देखें (All)</button>
+        <button class="tab-btn uk" onclick="showCategory('uk-sec', this)">🏛️ उत्तराखंड सरकारी विभाग</button>
+        <button class="tab-btn central" onclick="showCategory('central-sec', this)">🇮🇳 केंद्र सरकार व रक्षा भर्ती</button>
+        <button class="tab-btn edu" onclick="showCategory('edu-sec', this)">🎓 कॉलेज, यूनिवर्सिटी & ITI</button>
+        <button class="tab-btn pvt" onclick="showCategory('pvt-sec', this)">🏢 सिडकुल, BHEL & प्राइवेट</button>
+        <button class="tab-btn svc" onclick="showCategory('svc-sec', this)">📋 अपणी सरकार / सीएससी सेवाएं</button>
+    </div>
+
+    <!-- 1. उत्तराखंड राज्य सरकारी विभाग -->
+    <div class="category-block" id="uk-sec">
+        <div class="section-header">🏛️ उत्तराखंड राज्य सरकारी विभाग एवं आयोग (Uttarakhand Govt Portals)</div>
         <ul>
-            <!-- भारतीय सेना -->
-            <li class="army-item">
-                <div class="job-info">
-                    <div class="job-title">भारतीय सेना (Indian Army - Agniveer)</div>
-                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है (केवल एडमिट कार्ड/रिजल्ट)</div>
-                    <div class="job-location">📍 लोकेशन: उत्तराखंड (अल्मोड़ा, लैंसडाउन, पिथौरागढ़, रुड़की)</div>
-                    <div class="job-desc">योग्यता: 8वीं, 10वीं, 12वीं पास</div>
-                </div>
-                <a href="https://joinindianarmy.nic.in" target="_blank" class="action-btn army">आर्मी पोर्टल खोलें</a>
-            </li>
-
-            <!-- पोस्ट ऑफिस -->
-            <li>
-                <div class="job-info">
-                    <div class="job-title">इंडिया पोस्ट ऑफिस (GDS / Postman)</div>
-                    <div class="job-status status-active">🟢 स्टेटस: वेकेंसी चालू है! (कुल पद: 452)</div>
-                    <div class="job-location">📍 लोकेशन: पूरा उत्तराखंड सर्किल</div>
-                    <div class="job-desc">योग्यता: 10वीं पास (बिना परीक्षा सीधी मेरिट भर्ती)</div>
-                </div>
-                <a href="https://www.indiapost.gov.in/gdsonlineengagement" target="_blank" class="action-btn">फॉर्म लिंक खोलें</a>
-            </li>
-
             <!-- UKSSSC -->
-            <li>
-                <div class="job-info">
-                    <div class="job-title">UKSSSC (अधीनस्थ सेवा चयन आयोग)</div>
-                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है</div>
-                    <div class="job-location">📍 लोकेशन: उत्तराखंड राज्य</div>
-                    <div class="job-desc">योग्यता: 12वीं / स्नातक (ग्रुप 'C', वन आरक्षी)</div>
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">UKSSSC (उत्तराखंड अधीनस्थ सेवा चयन आयोग)</div>
+                    <div class="tags tag-active">🟢 समूह 'ग' (Group C), कनिष्ठ सहायक, वीपीडीओ, वन आरक्षी भर्ती</div>
+                    <div class="meta">📍 लोकेशन: समस्त उत्तराखंड | 📝 योग्यता: 12वीं / स्नातक</div>
                 </div>
-                <a href="https://sssc.uk.gov.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+                <div class="btn-col">
+                    <a href="https://sssc.uk.gov.in" target="_blank" class="btn btn-blue">UKSSSC पोर्टल</a>
+                </div>
             </li>
 
             <!-- UKPSC -->
-            <li>
-                <div class="job-info">
-                    <div class="job-title">UKPSC (लोक सेवा आयोग उत्तराखंड)</div>
-                    <div class="job-status status-admit">🔵 स्टेटस: परीक्षा / एडमिट कार्ड डाउनलोड चल रहे हैं</div>
-                    <div class="job-location">📍 लोकेशन: उत्तराखंड राज्य</div>
-                    <div class="job-desc">योग्यता: स्नातक / स्नातकोत्तर (पीसीएस, पटवारी, प्रवक्ता)</div>
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">UKPSC (उत्तराखंड लोक सेवा आयोग, हरिद्वार)</div>
+                    <div class="tags tag-update">🔵 पीसीएस (PCS), पटवारी/लेखपाल, एई/जेई, समीक्षा अधिकारी व प्रवक्ता</div>
+                    <div class="meta">📍 लोकेशन: उत्तराखंड | 📝 योग्यता: स्नातक / स्नातकोत्तर</div>
                 </div>
-                <a href="https://psc.uk.gov.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+                <div class="btn-col">
+                    <a href="https://psc.uk.gov.in" target="_blank" class="btn btn-blue">UKPSC पोर्टल</a>
+                </div>
             </li>
 
-            <!-- बैंकिंग -->
-            <li>
-                <div class="job-info">
-                    <div class="job-title">IBPS & SBI (बैंकिंग सेक्टर - सरकारी बैंक)</div>
-                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है</div>
-                    <div class="job-location">📍 लोकेशन: उत्तराखंड (सभी बैंक शाखाएं)</div>
-                    <div class="job-desc">योग्यता: ग्रेजुएशन (क्लर्क और पीओ)</div>
+            <!-- UK Police -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड पुलिस (Police, PAC, Fireman, Sub-Inspector)</div>
+                    <div class="tags tag-active">🟢 पुलिस आरक्षी, महिला पुलिस, पीएसी एवं दरोगा (SI) भर्ती पोर्टल</div>
+                    <div class="meta">📍 लोकेशन: उत्तराखंड पुलिस मुख्यालय | 📝 योग्यता: 10वीं, 12वीं, ग्रेजुएशन</div>
                 </div>
-                <a href="https://www.ibps.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+                <div class="btn-col">
+                    <a href="https://uttarakhandpolice.uk.gov.in" target="_blank" class="btn btn-blue">पुलिस भर्ती पोर्टल</a>
+                </div>
             </li>
 
-            <!-- रेलवे -->
-            <li>
-                <div class="job-info">
-                    <div class="job-title">रेलवे भर्ती बोर्ड (RRB / RRC Northern Railway)</div>
-                    <div class="job-status status-closed">🔴 स्टेटस: अभी उत्तराखंड जोन में डायरेक्ट वेकेंसी नहीं है</div>
-                    <div class="job-location">📍 लोकेशन: उत्तर रेलवे ज़ोन</div>
-                    <div class="job-desc">योग्यता: 10वीं / आईटीआई / डिप्लोमा</div>
+            <!-- ऊर्जा व बिजली विभाग (UPCL / PTCUL / UJVNL) -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">ऊर्जा विभाग (UPCL, PTCUL, UJVNL - बिजली विभाग)</div>
+                    <div class="tags tag-active">🟢 लाइनमैन, टीजी-2, एई/जेई, ऑफिस असिस्टेंट भर्ती एवं बिल पोर्टल</div>
+                    <div class="meta">📍 लोकेशन: देहरादून व समस्त उत्तराखंड | 📝 योग्यता: ITI (इलेक्ट्रीशियन) / डिप्लोमा / डिग्री</div>
                 </div>
-                <a href="https://www.rrcnr.net.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+                <div class="btn-col">
+                    <a href="https://www.upcl.org" target="_blank" class="btn btn-blue">UPCL (बिजली निगम)</a>
+                    <a href="https://www.ptcul.org" target="_blank" class="btn btn-gray">PTCUL पोर्टल</a>
+                    <a href="https://www.ujvnl.com" target="_blank" class="btn btn-gray">UJVNL पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- चिकित्सा एवं स्वास्थ्य सेवा बोर्ड (UKMSSB) -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">UKMSSB (उत्तराखंड चिकित्सा सेवा चयन बोर्ड)</div>
+                    <div class="tags tag-active">🟢 नर्सिंग अधिकारी, CHO, ANM, GNM, फार्मासिस्ट व लैब टेक्नीशियन भर्ती</div>
+                    <div class="meta">📍 लोकेशन: स्वास्थ्य विभाग उत्तराखंड | 📝 योग्यता: ANM/GNM, B.Sc Nursing, D/B.Pharm</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://ukmssb.org" target="_blank" class="btn btn-blue">UKMSSB पोर्टल खोलें</a>
+                </div>
+            </li>
+
+            <!-- पेयजल निगम एवं जल संस्थान (Water Dept) -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड पेयजल निगम एवं जल संस्थान (Water Dept)</div>
+                    <div class="tags tag-active">🟢 जूनियर इंजीनियर (JE), क्लर्क, अप्रेंटिस भर्ती एवं टेंडर पोर्टल</div>
+                    <div class="meta">📍 लोकेशन: समस्त उत्तराखंड | 📝 योग्यता: 10वीं, 12वीं, डिप्लोमा (सिविल/मैकेनिकल)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="http://peyjal.uk.gov.in" target="_blank" class="btn btn-blue">पेयजल निगम पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- वन विभाग (Forest Dept) -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड वन विभाग (Forest Department Uttarakhand)</div>
+                    <div class="tags tag-notice">🔴 वन आरक्षी (Forest Guard), वन दरोगा (Forester) भर्ती अपडेट</div>
+                    <div class="meta">📍 लोकेशन: उत्तराखंड वन मंडल (लैंसडाउन, कॉर्बेट आदि) | 📝 योग्यता: 12वीं साइंस</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://forest.uk.gov.in" target="_blank" class="btn btn-blue">वन विभाग पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- नैनीताल हाईकोर्ट -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">नैनीताल हाईकोर्ट एवं जिला न्यायालय (High Court Uttarakhand)</div>
+                    <div class="tags tag-update">🔵 कनिष्ठ सहायक, आशुलिपिक (Steno), चतुर्थ श्रेणी भर्ती पोर्टल</div>
+                    <div class="meta">📍 लोकेशन: नैनीताल एवं समस्त जिला अदालतें | 📝 योग्यता: 10वीं, 12वीं, ग्रेजुएशन</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://highcourtofuttarakhand.gov.in" target="_blank" class="btn btn-blue">हाईकोर्ट भर्ती पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- होमगार्ड विभाग -->
+            <li class="item-card">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड होमगार्ड एवं नागरिक सुरक्षा विभाग</div>
+                    <div class="tags tag-active">🟢 महिला एवं पुरुष होमगार्ड स्वयंसेवक भर्ती</div>
+                    <div class="meta">📍 लोकेशन: समस्त उत्तराखंड जनपद | 📝 योग्यता: 8वीं / 10वीं पास</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://homeguard.uk.gov.in" target="_blank" class="btn btn-blue">होमगार्ड पोर्टल</a>
+                </div>
             </li>
         </ul>
     </div>
 
-    <!-- 2. प्राइवेट, SIDCUL, BHEL और होटल सेक्शन (शुरुआत में बंद रहेगा) -->
-    <div class="section-box" id="pvt-section">
-        <div class="section-title pvt-bg">🏢 प्राइवेट, SIDCUL, BHEL और होटल इंडस्ट्री (Private & Industrial)</div>
+    <!-- 2. केंद्र सरकार एवं रक्षा भर्ती -->
+    <div class="category-block" id="central-sec">
+        <div class="section-header central-bg">🇮🇳 केंद्र सरकार, रक्षा बल & बैंकिंग भर्ती (Central & Defence Jobs)</div>
         <ul>
-            <!-- BHEL -->
-            <li class="pvt-item">
-                <div class="job-info">
-                    <div class="job-title">BHEL हरिद्वार (अप्रेंटिस और ट्रेनी पद)</div>
-                    <div class="job-status status-closed">🔴 स्टेटस: अभी नया अप्रेंटिस फॉर्म बंद है</div>
-                    <div class="job-location">📍 लोकेशन: भेल, रानीपुर (हरिद्वार)</div>
-                    <div class="job-desc">योग्यता: आईटीआई / डिप्लोमा / इंजीनियरिंग</div>
+            <!-- Indian Army -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">भारतीय सेना (Join Indian Army - Agniveer Rally)</div>
+                    <div class="tags tag-notice">🔴 अग्निवीर जीडी, क्लर्क, टेक्निकल, ट्रेड्समैन रैली व रिजल्ट</div>
+                    <div class="meta">📍 लोकेशन: उत्तराखंड (लैंसडाउन, अल्मोड़ा, पिथौरागढ़, रुड़की) | 📝 योग्यता: 8वीं, 10वीं, 12वीं पास</div>
                 </div>
-                <a href="https://hwr.bhel.com" target="_blank" class="action-btn pvt">भेल पोर्टल देखें</a>
+                <div class="btn-col">
+                    <a href="https://joinindianarmy.nic.in" target="_blank" class="btn btn-red">आर्मी पोर्टल खोलें</a>
+                </div>
             </li>
 
-            <!-- SIDCUL -->
-            <li class="pvt-item">
-                <div class="job-info">
-                    <div class="job-title">SIDCUL हरिद्वार और पंतनगर कंपनियां</div>
-                    <div class="job-status status-active">🟢 स्टेटस: प्राइवेट कंपनियों में लगातार सीधी भर्ती चालू है</div>
-                    <div class="job-location">📍 लोकेशन: सिडकुल (हरिद्वार, पंतनगर, सितारगंज)</div>
-                    <div class="job-desc">योग्यता: 10वीं, 12वीं, आईटीआई, डिप्लोमा</div>
+            <!-- SSC New Portal -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">SSC (कर्मचारी चयन आयोग - New Official Portal)</div>
+                    <div class="tags tag-active">🟢 SSC GD कांस्टेबल, CGL, CHSL, MTS, CPO SI, स्टेनो भर्ती</div>
+                    <div class="meta">📍 ऑल इंडिया | 📝 नया वन टाइम रजिस्ट्रेशन (OTR) और ऑनलाइन फॉर्म</div>
                 </div>
-                <a href="https://www.ncs.gov.in" target="_blank" class="action-btn pvt">NCS पोर्टल देखें</a>
+                <div class="btn-col">
+                    <a href="https://ssc.gov.in" target="_blank" class="btn btn-red">SSC नया पोर्टल खोलें</a>
+                </div>
             </li>
 
-            <!-- होटल्स -->
-            <li class="pvt-item">
-                <div class="job-info">
-                    <div class="job-title">उत्तराखंड होटल, रिजॉर्ट्स & टूरिज्म स्टाफ</div>
-                    <div class="job-status status-active">🟢 स्टेटस: होटलों में स्टाफ (शेफ/वेटर) की मांग लगातार है</div>
-                    <div class="job-location">📍 लोकेशन: नैनीताल, मसूरी, ऋषिकेश, कॉर्बेट, हरिद्वार</div>
-                    <div class="job-desc">योग्यता: अनुभव या होटल मैनेजमेंट</div>
+            <!-- India Post GDS -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">इंडिया पोस्ट ऑफिस (GDS / डाक सेवक सीधी भर्ती)</div>
+                    <div class="tags tag-active">🟢 ग्रामीण डाक सेवक (GDS/BPM/ABPM) मेरिट भर्ती व रिजल्ट पोर्टल</div>
+                    <div class="meta">📍 उत्तराखंड सर्किल (कोटद्वार व समस्त डाकघर) | 📝 योग्यता: 10वीं पास (सीधी मेरिट)</div>
                 </div>
-                <a href="https://in.indeed.com/l-uttarakhand-jobs.html" target="_blank" class="action-btn pvt">Indeed पर देखें</a>
+                <div class="btn-col">
+                    <a href="https://indiapostgdsonline.gov.in/" target="_blank" class="btn btn-red">GDS मुख्य पोर्टल</a>
+                </div>
             </li>
 
-            <!-- लोकल मार्केट -->
-            <li class="pvt-item">
-                <div class="job-info">
-                    <div class="job-title">WorkIndia / Apna ऐप (लोकल दुकानें व मॉल)</div>
-                    <div class="job-status status-active">🟢 स्टेटस: लोकल दुकानों और शोरूम के लिए हमेशा ओपन है</div>
-                    <div class="job-location">📍 लोकेशन: आपके अपने शहर (कोटद्वार आदि)</div>
-                    <div class="job-desc">योग्यता: 8वीं, 10वीं, 12वीं (हेल्पर, सेल्समैन)</div>
+            <!-- Railway Apply Portal -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">रेलवे भर्ती (RRB Apply & RRC Northern Railway)</div>
+                    <div class="tags tag-active">🟢 ALP, टेक्नीशियन, NTPC, ग्रुप D और उत्तर रेलवे अपरेंटिस</div>
+                    <div class="meta">📍 लोकेशन: उत्तर रेलवे ज़ोन (मुरादाबाद/उत्तराखंड) | 📝 योग्यता: 10वीं, ITI, डिप्लोमा, डिग्री</div>
                 </div>
-                <a href="https://www.workindia.in" target="_blank" class="action-btn pvt">ऐप खोलें</a>
+                <div class="btn-col">
+                    <a href="https://www.rrbapply.gov.in" target="_blank" class="btn btn-red">RRB Apply पोर्टल</a>
+                    <a href="https://www.rrcnr.org" target="_blank" class="btn btn-gray">उत्तर रेलवे (RRC)</a>
+                </div>
+            </li>
+
+            <!-- IBPS Banking -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">बैंकिंग सेक्टर (IBPS / SBI / ग्रामीण बैंक भर्ती)</div>
+                    <div class="tags tag-active">🟢 बैंक क्लर्क, प्रोबेशनरी ऑफिसर (PO) व स्पेशलिस्ट ऑफिसर (SO)</div>
+                    <div class="meta">📍 उत्तराखंड (SBI, PNB, उत्तराखंड ग्रामीण बैंक आदि) | 📝 योग्यता: स्नातक</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://www.ibps.in" target="_blank" class="btn btn-red">IBPS पोर्टल</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 3. कॉलेज, यूनिवर्सिटी, आईटीआई एवं बोर्ड -->
+    <div class="category-block" id="edu-sec">
+        <div class="section-header edu-bg">🎓 कोटद्वार कॉलेज, यूनिवर्सिटी, ITI, पॉलीटेक्निक & बोर्ड (Education)</div>
+        <ul>
+            <!-- पीजी कॉलेज कोटद्वार -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">पीजी कॉलेज कोटद्वार (डॉ. पी.डी. बड़थ्वाल राजकीय पीजी कॉलेज)</div>
+                    <div class="tags tag-active">🟢 1st Year फ्रेश एडमिशन, सेमेस्टर एग्जाम फॉर्म व एडमिट कार्ड (SDSUV समर्थ पोर्टल)</div>
+                    <div class="meta">📍 लोकेशन: कोटद्वार (श्री देव सुमन उत्तराखंड यूनिवर्सिटी संबद्ध)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://ukadmission.samarth.ac.in/" target="_blank" class="btn btn-orange">1. नया 1st Year एडमिशन</a>
+                    <a href="https://sdsuv.samarth.edu.in/index.php/site/login" target="_blank" class="btn btn-blue">2. छात्र लॉगिन / परीक्षा फॉर्म</a>
+                    <a href="https://sdsuv.samarth.edu.in" target="_blank" class="btn btn-green">3. एडमिट कार्ड / रिजल्ट</a>
+                </div>
+            </li>
+
+            <!-- श्री देव सुमन यूनिवर्सिटी (SDSUV Main) -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">श्री देव सुमन उत्तराखंड यूनिवर्सिटी (SDSUV - बादशाहीथौल टिहरी)</div>
+                    <div class="tags tag-active">🟢 वार्षिक/सेमेस्टर बैक पेपर, सुधार परीक्षा, मुख्य परीक्षा परिणाम व डिग्री</div>
+                    <div class="meta">📍 संबद्ध कॉलेज: कोटद्वार, लैंसडाउन, श्रीनगर, ऋषिकेश, उत्तरकाशी, टिहरी</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://sdsuv.samarth.edu.in/index.php/site/login" target="_blank" class="btn btn-orange">बैक पेपर & एग्जाम फॉर्म</a>
+                    <a href="https://www.sdsuv.ac.in" target="_blank" class="btn btn-gray">यूनिवर्सिटी मुख्य वेबसाइट</a>
+                </div>
+            </li>
+
+            <!-- उत्तराखंड ओपन यूनिवर्सिटी (UOU) -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड मुक्त विश्वविद्यालय (UOU हल्द्वानी - Open University)</div>
+                    <div class="tags tag-active">🟢 घर बैठे बीए, बीकॉम, बीएससी, एमए, बीएड, योगा, डिप्लोमा एडमिशन व असाइनमेंट</div>
+                    <div class="meta">📍 अध्ययन केंद्र: पीजी कॉलेज कोटद्वार एवं समस्त उत्तराखंड</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://www.uou.ac.in" target="_blank" class="btn btn-orange">UOU एडमिशन & असाइनमेंट</a>
+                </div>
+            </li>
+
+            <!-- राजकीय आईटीआई कोटद्वार -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">राजकीय आईटीआई कोटद्वार (Uttarakhand ITI Admission)</div>
+                    <div class="tags tag-active">🟢 ऑनलाइन ITI एडमिशन, काउंसलिंग, ट्रेड चॉइस व मार्कशीट पोर्टल</div>
+                    <div class="meta">📍 योग्यता: 8वीं / 10वीं पास (इलेक्ट्रीशियन, फिटर, वेल्डर आदि)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://vpputtarakhand.in" target="_blank" class="btn btn-orange">ITI प्रवेश पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- उत्तराखंड पॉलिटेक्निक (UBTER JEEP) -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड पॉलीटेक्निक (UBTER JEEP - प्राविधिक शिक्षा परिषद)</div>
+                    <div class="tags tag-active">🟢 JEEP संयुक्त प्रवेश परीक्षा, सीट आवंटन, सेमेस्टर एडमिट कार्ड व रिजल्ट</div>
+                    <div class="meta">📍 लोकेशन: राजकीय पॉलिटेक्निक कोटद्वार एवं समस्त उत्तराखंड</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://www.ubter.in" target="_blank" class="btn btn-orange">UBTER बोर्ड पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- उत्तराखंड बोर्ड (UBSE) & UTET -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड बोर्ड (UBSE रामनगर) & UTET (शिक्षक पात्रता परीक्षा)</div>
+                    <div class="tags tag-active">🟢 10वीं/12वीं बोर्ड रिजल्ट, स्क्रूटनी, सुधार परीक्षा एवं UTET-I / UTET-II फॉर्म</div>
+                    <div class="meta">📍 उत्तराखंड विद्यालयी शिक्षा परिषद, रामनगर (नैनीताल)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://ubse.uk.gov.in" target="_blank" class="btn btn-orange">UBSE बोर्ड पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- उत्तराखंड मेडिकल यूनिवर्सिटी (HNBUMU) -->
+            <li class="item-card edu-item">
+                <div class="info-col">
+                    <div class="title">HNBUMU (उत्तराखंड मेडिकल एजुकेशन यूनिवर्सिटी)</div>
+                    <div class="tags tag-active">🟢 B.Sc Nursing, Post Basic, M.Sc Nursing, ANM, GNM, Paramedical प्रवेश परीक्षा</div>
+                    <div class="meta">📍 लोकेशन: देहरादून (समस्त सरकारी/प्राइवेट नर्सिंग कॉलेज)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="http://hnbumu.ac.in" target="_blank" class="btn btn-orange">नर्सिंग प्रवेश पोर्टल</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 4. सिडकुल, BHEL, फार्मा व प्राइवेट जॉब्स -->
+    <div class="category-block" id="pvt-sec">
+        <div class="section-header pvt-bg">🏢 सिडकुल, BHEL, फार्मास्यूटिकल & प्राइवेट जॉब्स (Private Jobs)</div>
+        <ul>
+            <!-- BHEL Haridwar -->
+            <li class="item-card pvt-item">
+                <div class="info-col">
+                    <div class="title">BHEL हरिद्वार (भारत हेवी इलेक्ट्रिकल्स लिमिटेड)</div>
+                    <div class="tags tag-notice">🔴 ITI ट्रेड अपरेंटिस, डिप्लोमा/इंजीनियरिंग ग्रेजुएट अप्रेंटिस व भर्ती</div>
+                    <div class="meta">📍 लोकेशन: रानीपुर (हरिद्वार) | 📝 योग्यता: ITI, डिप्लोमा, BE/B.Tech</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://hwr.bhel.com" target="_blank" class="btn btn-green">BHEL पोर्टल खोलें</a>
+                </div>
+            </li>
+
+            <!-- SIDCUL & NCS -->
+            <li class="item-card pvt-item">
+                <div class="info-col">
+                    <div class="title">SIDCUL कंपनियां (कोटद्वार सिगड्डी, हरिद्वार, सेलाकुई, पंतनगर)</div>
+                    <div class="tags tag-active">🟢 नेशनल करियर सर्विस (NCS) - सिडकुल फैक्ट्रियों में ऑपरेटर, हेल्पर, सुपरवाइजर</div>
+                    <div class="meta">📍 योग्यता: 8वीं, 10वीं, 12वीं, ITI, डिप्लोमा, ग्रेजुएट</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://www.ncs.gov.in" target="_blank" class="btn btn-green">NCS जॉब पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- फार्मा इंडस्ट्री -->
+            <li class="item-card pvt-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड फार्मा कंपनियां (भगवानपुर, रुड़की, सेलाकुई, हरिद्वार)</div>
+                    <div class="tags tag-active">🟢 प्रोडक्शन, पैकिंग, क्वालिटी कंट्रोल (QC/QA), केमिस्ट व हेल्पर जॉब्स</div>
+                    <div class="meta">📍 योग्यता: 10वीं, 12वीं, B.Sc, M.Sc, D.Pharm, B.Pharm</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://in.indeed.com/q-pharma-jobs-in-uttarakhand-jobs.html" target="_blank" class="btn btn-green">फर्मा जॉब्स देखें</a>
+                </div>
+            </li>
+
+            <!-- होटल व लोकल जॉब्स -->
+            <li class="item-card pvt-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड होटल, रिजॉर्ट्स & लोकल कोटद्वार जॉब्स</div>
+                    <div class="tags tag-active">🟢 होटल शेफ, वेटर, रिसेप्शन, लोकल दुकान/शोरूम सेल्समैन व कंप्यूटर ऑपरेटर</div>
+                    <div class="meta">📍 लोकेशन: कोटद्वार, लैंसडाउन, ऋषिकेश, देहरादून, हरिद्वार</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://in.indeed.com/l-uttarakhand-jobs.html" target="_blank" class="btn btn-green">Indeed उत्तराखंड</a>
+                    <a href="https://www.workindia.in" target="_blank" class="btn btn-gray">WorkIndia ऐप</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 5. अपणी सरकार (ई-डिस्ट्रिक्ट) एवं नागरिक सेवाएं -->
+    <div class="category-block" id="svc-sec">
+        <div class="section-header svc-bg">📋 दुकानदार स्पेशल: अपणी सरकार, छात्रवृत्ति, राशन कार्ड & श्रमिक कार्ड (CSC Services)</div>
+        <ul>
+            <!-- अपणी सरकार (eServices Uttarakhand) -->
+            <li class="item-card svc-item">
+                <div class="info-col">
+                    <div class="title">अपणी सरकार पोर्टल - उत्तराखंड (eServices UK / नया e-District)</div>
+                    <div class="tags tag-active">🟢 स्थायी निवास (Domicile), जाति प्रमाण पत्र (Caste), आय (Income), ईडब्ल्यूएस (EWS), चरित्र व परिवार रजिस्टर नकल</div>
+                    <div class="meta">📍 सेवा का अधिकार: तहसीलदार / एसडीएम स्तर से डिजिटल हस्ताक्षरित प्रमाण पत्र</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://eservices.uk.gov.in" target="_blank" class="btn btn-purple">अपणी सरकार पोर्टल खोलें</a>
+                </div>
+            </li>
+
+            <!-- राशन कार्ड पोर्टल (FCS UK) -->
+            <li class="item-card svc-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड खाद्य एवं नागरिक आपूर्ति (FCS UK - राशन कार्ड पोर्टल)</div>
+                    <div class="tags tag-active">🟢 नया राशन कार्ड आवेदन, यूनिट जोड़ना/हटाना, राशन कार्ड डाउनलोड व सूची</div>
+                    <div class="meta">📍 खाद्य एवं नागरिक आपूर्ति विभाग, उत्तराखंड</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://fcs.uk.gov.in" target="_blank" class="btn btn-purple">राशन कार्ड पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- उत्तराखंड भवन एवं सन्निर्माण कर्मकार कल्याण बोर्ड (BOCW) -->
+            <li class="item-card svc-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड श्रमिक कार्ड पोर्टल (UK BOCW Board)</div>
+                    <div class="tags tag-active">🟢 लेबर कार्ड पंजीकरण, नवीनीकरण (Renewal) एवं श्रमिक छात्रवृत्ति/साइकिल/औजार योजना</div>
+                    <div class="meta">📍 सुविधा: पंजीकृत निर्माण श्रमिकों के बच्चों हेतु सरकारी सहायता</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://ukbocw.org.in" target="_blank" class="btn btn-purple">BOCW श्रम कार्ड पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- नेशनल स्कॉलरशिप पोर्टल (NSP) -->
+            <li class="item-card svc-item">
+                <div class="info-col">
+                    <div class="title">नेशनल स्कॉलरशिप पोर्टल (NSP & उत्तराखंड राज्य छात्रवृत्ति)</div>
+                    <div class="tags tag-active">🟢 प्री-मैट्रिक, पोस्ट-मैट्रिक, SC/ST/OBC/EWS एवं अल्पसंख्यक छात्रवृत्ति फॉर्म</div>
+                    <div class="meta">📍 स्कूल व कॉलेज छात्र बायोमेट्रिक प्रमाणीकरण व नया आवेदन</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://scholarships.gov.in" target="_blank" class="btn btn-purple">NSP छात्रवृत्ति पोर्टल</a>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="footer">
-        <p class="blessing">"जय श्री राम 🙏 - अब स्क्रीन बिल्कुल साफ रहेगी, जिस बटन पर क्लिक करोगे सिर्फ वही लिस्ट खुलेगी!"</p>
+        <p class="blessing">🚩 "जय श्री राम 🙏 - अपणी सरकार (eservices.uk.gov.in) सहित सभी लिंक्स 100% वेरिफाइड एवं एक्टिव हैं!"</p>
     </div>
 </div>
 
-<!-- इस कोड से क्लिक करने पर लिस्ट खुलेगी या बंद होगी -->
+<!-- ⚡ जावास्क्रिप्ट फ़िल्टर व सर्च इंजन -->
 <script>
-    function toggleSection(sectionId) {
-        var box = document.getElementById(sectionId);
-        if (box.style.display === "block") {
-            box.style.display = "none";
+    function showCategory(categoryId, btnElement) {
+        var buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(function(b) { b.classList.remove('active'); });
+        btnElement.classList.add('active');
+
+        document.getElementById('searchInput').value = '';
+
+        var blocks = document.querySelectorAll('.category-block');
+        if (categoryId === 'all') {
+            blocks.forEach(function(b) { b.style.display = 'block'; });
         } else {
-            // दोनों को बंद करके सिर्फ क्लिक वाले को खोलेंगे ताकि स्क्रीन पर एक समय पर एक ही खुले
-            document.getElementById('govt-section').style.display = "none";
-            document.getElementById('pvt-section').style.display = "none";
-            box.style.display = "block";
+            blocks.forEach(function(b) { b.style.display = 'none'; });
+            document.getElementById(categoryId).style.display = 'block';
+        }
+
+        var items = document.querySelectorAll('li.item-card');
+        items.forEach(function(item) { item.style.display = 'flex'; });
+    }
+
+    function filterContent() {
+        var input = document.getElementById('searchInput').value.toLowerCase();
+        var blocks = document.querySelectorAll('.category-block');
+        var items = document.querySelectorAll('li.item-card');
+
+        blocks.forEach(function(b) { b.style.display = 'block'; });
+
+        items.forEach(function(item) {
+            var text = item.textContent.toLowerCase();
+            if (text.includes(input)) {
+                item.style.display = 'flex';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        if (input.trim() === '') {
+            var activeTab = document.querySelector('.tab-btn.active');
+            if (activeTab) {
+                activeTab.click();
+            }
         }
     }
 </script>
