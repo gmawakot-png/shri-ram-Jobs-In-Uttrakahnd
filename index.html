@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>श्री राम जॉब्स पोर्टल - उत्तराखंड (मास्टर ड्रॉप-डाउन)</title>
+    <style>
+        body { font-family: Arial, sans-serif; background-color: #eef2f7; margin: 0; padding: 15px; color: #333; }
+        .container { max-width: 950px; margin: auto; background: #fff; padding: 25px; border-radius: 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #8b0000; font-size: 26px; margin-bottom: 5px; }
+        .sub-heading { text-align: center; color: #555; font-size: 14px; margin-bottom: 25px; }
+        
+        /* काउंटर कार्ड स्टाइल (फ्रंट पेज) */
+        .dashboard-cards { display: flex; gap: 15px; justify-content: space-around; margin-bottom: 25px; flex-wrap: wrap; }
+        .card { flex: 1; min-width: 250px; background: #f8f9fa; border-radius: 8px; padding: 20px; text-align: center; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-top: 5px solid #004085; }
+        .card.pvt { border-top-color: #28a745; }
+        .card h3 { margin: 0; font-size: 18px; color: #333; }
+        .count-number { font-size: 28px; font-weight: bold; color: #004085; margin: 8px 0; }
+        .card.pvt .count-number { color: #28a745; }
+        .card-btn { display: inline-block; background: #004085; color: #fff; padding: 7px 16px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; margin-top: 5px; cursor: pointer; border: none; }
+        .card.pvt .card-btn { background: #28a745; }
+        .card-btn:hover { opacity: 0.9; }
+
+        /* ड्रॉप-डाउन छुपी हुई सूचियाँ (शुरुआत में बंद रहेंगी) */
+        .section-box { display: none; margin-top: 20px; border-top: 2px solid #ddd; padding-top: 20px; }
+        .section-title { background: #004085; color: white; padding: 10px 15px; border-radius: 5px; font-size: 18px; margin-bottom: 15px; }
+        .section-title.pvt-bg { background: #28a745; }
+
+        ul { list-style: none; padding: 0; }
+        li { background: #fafafa; margin: 10px 0; padding: 12px 15px; border-left: 5px solid #004085; border-radius: 0 5px 5px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; box-shadow: 0 1px 3px rgba(0,0,0,0.05); }
+        li.pvt-item { border-left-color: #28a745; }
+        li.army-item { border-left-color: #d9534f; }
+
+        .job-info { flex: 1; min-width: 280px; }
+        .job-title { font-weight: bold; font-size: 16px; color: #111; }
+        .job-status { font-size: 14px; font-weight: bold; margin-top: 4px; }
+        .status-active { color: #28a745; } 
+        .status-closed { color: #d9534f; } 
+        .status-admit { color: #004085; } 
+        
+        .job-location { font-size: 13px; color: #555; margin-top: 3px; }
+        .job-desc { font-size: 13px; color: #444; margin-top: 3px; }
+        
+        a.action-btn { background: #004085; color: white; padding: 7px 14px; text-decoration: none; border-radius: 4px; font-size: 13px; font-weight: bold; display: inline-block; margin-top: 5px; }
+        a.action-btn.pvt { background: #28a745; }
+        a.action-btn.army { background: #d9534f; }
+        a.action-btn:hover { opacity: 0.85; }
+
+        .footer { text-align: center; margin-top: 40px; font-size: 13px; color: #666; border-top: 1px solid #ddd; padding-top: 15px; }
+        .blessing { font-weight: bold; color: #8b0000; font-size: 15px; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🚩 श्री राम जॉब्स पोर्टल (उत्तराखंड)</h1>
+    <div class="sub-heading">दुकानदार साथी: स्क्रीन साफ-सुथरी रहेगी, जिस बटन पर क्लिक करोगे सिर्फ वही लिस्ट खुलेगी!</div>
+
+    <!-- फ्रंट पेज काउंटर कार्ड (दाएं और बाएं) -->
+    <div class="dashboard-cards">
+        <div class="card">
+            <h3>🏛️ सरकारी व आर्मी विभाग</h3>
+            <div class="count-number">01 Active</div>
+            <button class="card-btn" onclick="toggleSection('govt-section')">सूची देखें ▼</button>
+        </div>
+        <div class="card pvt">
+            <h3>🏢 प्राइवेट, SIDCUL & होटल</h3>
+            <div class="count-number">03 Active</div>
+            <button class="card-btn" onclick="toggleSection('pvt-section')">सूची देखें ▼</button>
+        </div>
+    </div>
+
+    <!-- 1. सरकारी विभाग एवं भारतीय सेना सेक्शन (शुरुआत में बंद रहेगा) -->
+    <div class="section-box" id="govt-section">
+        <div class="section-title">🏛️ सरकारी विभाग, आयोग एवं भारतीय सेना (Govt & Army)</div>
+        <ul>
+            <!-- भारतीय सेना -->
+            <li class="army-item">
+                <div class="job-info">
+                    <div class="job-title">भारतीय सेना (Indian Army - Agniveer)</div>
+                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है (केवल एडमिट कार्ड/रिजल्ट)</div>
+                    <div class="job-location">📍 लोकेशन: उत्तराखंड (अल्मोड़ा, लैंसडाउन, पिथौरागढ़, रुड़की)</div>
+                    <div class="job-desc">योग्यता: 8वीं, 10वीं, 12वीं पास</div>
+                </div>
+                <a href="https://joinindianarmy.nic.in" target="_blank" class="action-btn army">आर्मी पोर्टल खोलें</a>
+            </li>
+
+            <!-- पोस्ट ऑफिस -->
+            <li>
+                <div class="job-info">
+                    <div class="job-title">इंडिया पोस्ट ऑफिस (GDS / Postman)</div>
+                    <div class="job-status status-active">🟢 स्टेटस: वेकेंसी चालू है! (कुल पद: 452)</div>
+                    <div class="job-location">📍 लोकेशन: पूरा उत्तराखंड सर्किल</div>
+                    <div class="job-desc">योग्यता: 10वीं पास (बिना परीक्षा सीधी मेरिट भर्ती)</div>
+                </div>
+                <a href="https://www.indiapost.gov.in/gdsonlineengagement" target="_blank" class="action-btn">फॉर्म लिंक खोलें</a>
+            </li>
+
+            <!-- UKSSSC -->
+            <li>
+                <div class="job-info">
+                    <div class="job-title">UKSSSC (अधीनस्थ सेवा चयन आयोग)</div>
+                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है</div>
+                    <div class="job-location">📍 लोकेशन: उत्तराखंड राज्य</div>
+                    <div class="job-desc">योग्यता: 12वीं / स्नातक (ग्रुप 'C', वन आरक्षी)</div>
+                </div>
+                <a href="https://sssc.uk.gov.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+            </li>
+
+            <!-- UKPSC -->
+            <li>
+                <div class="job-info">
+                    <div class="job-title">UKPSC (लोक सेवा आयोग उत्तराखंड)</div>
+                    <div class="job-status status-admit">🔵 स्टेटस: परीक्षा / एडमिट कार्ड डाउनलोड चल रहे हैं</div>
+                    <div class="job-location">📍 लोकेशन: उत्तराखंड राज्य</div>
+                    <div class="job-desc">योग्यता: स्नातक / स्नातकोत्तर (पीसीएस, पटवारी, प्रवक्ता)</div>
+                </div>
+                <a href="https://psc.uk.gov.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+            </li>
+
+            <!-- बैंकिंग -->
+            <li>
+                <div class="job-info">
+                    <div class="job-title">IBPS & SBI (बैंकिंग सेक्टर - सरकारी बैंक)</div>
+                    <div class="job-status status-closed">🔴 स्टेटस: अभी नई वेकेंसी नहीं है</div>
+                    <div class="job-location">📍 लोकेशन: उत्तराखंड (सभी बैंक शाखाएं)</div>
+                    <div class="job-desc">योग्यता: ग्रेजुएशन (क्लर्क और पीओ)</div>
+                </div>
+                <a href="https://www.ibps.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+            </li>
+
+            <!-- रेलवे -->
+            <li>
+                <div class="job-info">
+                    <div class="job-title">रेलवे भर्ती बोर्ड (RRB / RRC Northern Railway)</div>
+                    <div class="job-status status-closed">🔴 स्टेटस: अभी उत्तराखंड जोन में डायरेक्ट वेकेंसी नहीं है</div>
+                    <div class="job-location">📍 लोकेशन: उत्तर रेलवे ज़ोन</div>
+                    <div class="job-desc">योग्यता: 10वीं / आईटीआई / डिप्लोमा</div>
+                </div>
+                <a href="https://www.rrcnr.net.in" target="_blank" class="action-btn">वेबसाइट खोलें</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- 2. प्राइवेट, SIDCUL, BHEL और होटल सेक्शन (शुरुआत में बंद रहेगा) -->
+    <div class="section-box" id="pvt-section">
+        <div class="section-title pvt-bg">🏢 प्राइवेट, SIDCUL, BHEL और होटल इंडस्ट्री (Private & Industrial)</div>
+        <ul>
+            <!-- BHEL -->
+            <li class="pvt-item">
+                <div class="job-info">
+                    <div class="job-title">BHEL हरिद्वार (अप्रेंटिस और ट्रेनी पद)</div>
+                    <div class="job-status status-closed">🔴 स्टेटस: अभी नया अप्रेंटिस फॉर्म बंद है</div>
+                    <div class="job-location">📍 लोकेशन: भेल, रानीपुर (हरिद्वार)</div>
+                    <div class="job-desc">योग्यता: आईटीआई / डिप्लोमा / इंजीनियरिंग</div>
+                </div>
+                <a href="https://hwr.bhel.com" target="_blank" class="action-btn pvt">भेल पोर्टल देखें</a>
+            </li>
+
+            <!-- SIDCUL -->
+            <li class="pvt-item">
+                <div class="job-info">
+                    <div class="job-title">SIDCUL हरिद्वार और पंतनगर कंपनियां</div>
+                    <div class="job-status status-active">🟢 स्टेटस: प्राइवेट कंपनियों में लगातार सीधी भर्ती चालू है</div>
+                    <div class="job-location">📍 लोकेशन: सिडकुल (हरिद्वार, पंतनगर, सितारगंज)</div>
+                    <div class="job-desc">योग्यता: 10वीं, 12वीं, आईटीआई, डिप्लोमा</div>
+                </div>
+                <a href="https://www.ncs.gov.in" target="_blank" class="action-btn pvt">NCS पोर्टल देखें</a>
+            </li>
+
+            <!-- होटल्स -->
+            <li class="pvt-item">
+                <div class="job-info">
+                    <div class="job-title">उत्तराखंड होटल, रिजॉर्ट्स & टूरिज्म स्टाफ</div>
+                    <div class="job-status status-active">🟢 स्टेटस: होटलों में स्टाफ (शेफ/वेटर) की मांग लगातार है</div>
+                    <div class="job-location">📍 लोकेशन: नैनीताल, मसूरी, ऋषिकेश, कॉर्बेट, हरिद्वार</div>
+                    <div class="job-desc">योग्यता: अनुभव या होटल मैनेजमेंट</div>
+                </div>
+                <a href="https://in.indeed.com/l-uttarakhand-jobs.html" target="_blank" class="action-btn pvt">Indeed पर देखें</a>
+            </li>
+
+            <!-- लोकल मार्केट -->
+            <li class="pvt-item">
+                <div class="job-info">
+                    <div class="job-title">WorkIndia / Apna ऐप (लोकल दुकानें व मॉल)</div>
+                    <div class="job-status status-active">🟢 स्टेटस: लोकल दुकानों और शोरूम के लिए हमेशा ओपन है</div>
+                    <div class="job-location">📍 लोकेशन: आपके अपने शहर (कोटद्वार आदि)</div>
+                    <div class="job-desc">योग्यता: 8वीं, 10वीं, 12वीं (हेल्पर, सेल्समैन)</div>
+                </div>
+                <a href="https://www.workindia.in" target="_blank" class="action-btn pvt">ऐप खोलें</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p class="blessing">"जय श्री राम 🙏 - अब स्क्रीन बिल्कुल साफ रहेगी, जिस बटन पर क्लिक करोगे सिर्फ वही लिस्ट खुलेगी!"</p>
+    </div>
+</div>
+
+<!-- इस कोड से क्लिक करने पर लिस्ट खुलेगी या बंद होगी -->
+<script>
+    function toggleSection(sectionId) {
+        var box = document.getElementById(sectionId);
+        if (box.style.display === "block") {
+            box.style.display = "none";
+        } else {
+            // दोनों को बंद करके सिर्फ क्लिक वाले को खोलेंगे ताकि स्क्रीन पर एक समय पर एक ही खुले
+            document.getElementById('govt-section').style.display = "none";
+            document.getElementById('pvt-section').style.display = "none";
+            box.style.display = "block";
+        }
+    }
+</script>
+
+</body>
+</html>
