@@ -13,9 +13,23 @@
         .header { text-align: center; border-bottom: 2px solid #ff9933; padding-bottom: 12px; margin-bottom: 15px; }
         h1 { color: #8b0000; font-size: 24px; margin: 0 0 5px 0; }
         .sub-heading { color: #555; font-size: 13px; font-weight: bold; }
+        .update-note { margin-top: 8px; font-size: 11.5px; color: #8b5a00; background: #fff6e0; border: 1px dashed #ffbf47; border-radius: 6px; padding: 5px 10px; display: inline-block; }
 
         /* सर्च बार */
         .search-box { margin-bottom: 15px; }
+
+        /* 🔔 लाइव न्यूज़ टिकर (Google News से ऑटोमेटिक) */
+        .live-news-box { background: #fff8f0; border: 2px solid #ff9933; border-radius: 10px; padding: 12px 15px; margin-bottom: 18px; }
+        .live-news-title { font-weight: bold; color: #8b0000; font-size: 14px; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .live-news-title .dot { width: 8px; height: 8px; background: #28a745; border-radius: 50%; display: inline-block; animation: blink 1.5s infinite; }
+        @keyframes blink { 0%,100% { opacity: 1; } 50% { opacity: 0.3; } }
+        #liveNewsList { list-style: none; padding: 0; margin: 0; }
+        #liveNewsList li { font-size: 13px; padding: 6px 0; border-bottom: 1px dashed #eadfce; }
+        #liveNewsList li:last-child { border-bottom: none; }
+        #liveNewsList a { color: #004085; text-decoration: none; font-weight: 600; }
+        #liveNewsList a:hover { text-decoration: underline; }
+        .live-news-meta { font-size: 11px; color: #888; margin-top: 2px; }
+        .live-news-fallback { font-size: 12px; color: #b02a37; }
         .search-box input { width: 100%; padding: 12px 15px; font-size: 15px; border: 2px solid #004085; border-radius: 8px; outline: none; background: #fdfdfd; }
         .search-box input:focus { border-color: #ff8c00; box-shadow: 0 0 8px rgba(255,140,0,0.3); }
 
@@ -64,6 +78,8 @@
         a.btn-gray { background: #495057; }
         a.btn:hover { opacity: 0.88; }
 
+        .no-results { text-align: center; padding: 20px; color: #b02a37; font-weight: bold; font-size: 14px; background: #fff5f5; border-radius: 8px; display: none; }
+
         .footer { text-align: center; margin-top: 30px; font-size: 12px; color: #666; border-top: 1px solid #ddd; padding-top: 12px; }
         .blessing { font-weight: bold; color: #8b0000; font-size: 14px; }
     </style>
@@ -74,6 +90,15 @@
     <div class="header">
         <h1>🚩 श्री राम मास्टर जॉब्स & सर्विसेज पोर्टल (उत्तराखंड)</h1>
         <div class="sub-heading">दुकानदार / सीएससी साथी: सरकारी विभाग, बिजली, जल, पुलिस, स्वास्थ्य, कोटद्वार कॉलेज, आर्मी व अपणी सरकार सेवाएं!</div>
+        <div class="update-note" id="lastUpdatedNote">🔄 पेज में जानकारी अंतिम बार अपडेट: <strong>17 सितंबर 2026</strong> — नई भर्ती स्वतः नहीं जुड़ती, हर हफ्ते मैन्युअली चेक करके यह तारीख व लिस्ट खुद अपडेट करें।</div>
+    </div>
+
+    <!-- 🔔 लाइव न्यूज़ टिकर - Google News से खुद-ब-खुद ताज़ा भर्ती खबरें -->
+    <div class="live-news-box">
+        <div class="live-news-title"><span class="dot"></span> 🔔 ताज़ा उत्तराखंड भर्ती न्यूज़ (Live — Google News से अपने आप अपडेट होता है)</div>
+        <ul id="liveNewsList">
+            <li>⏳ लोड हो रहा है...</li>
+        </ul>
     </div>
 
     <!-- ⚡ लाइव सर्च बार -->
@@ -278,6 +303,25 @@
                 </div>
                 <div class="btn-col">
                     <a href="https://www.ibps.in" target="_blank" class="btn btn-red">IBPS पोर्टल</a>
+                </div>
+            </li>
+
+            <!-- Uttarakhand Gramin Bank (UGB) - IBPS RRB CRP-XV 2026 -->
+            <li class="item-card central-item">
+                <div class="info-col">
+                    <div class="title">उत्तराखंड ग्रामीण बैंक (UGB) भर्ती 2026 (IBPS RRB CRP-XV)</div>
+                    <div class="tags tag-auto"
+                         data-lastdate="2026-09-21"
+                         data-active-text="🟢 ऑफिस असिस्टेंट (मल्टीपर्पज), ऑफिसर स्केल-I/II/III भर्ती — ऑनलाइन आवेदन चालू है (अंतिम तारीख: 21 सितंबर 2026)"
+                         data-expired-text="🔴 आवेदन की अंतिम तारीख (21 सितंबर 2026) निकल चुकी है — अभी आवेदन नहीं होगा, अगली भर्ती के लिए IBPS पोर्टल चेक करते रहें">
+                         🟢 ऑफिस असिस्टेंट (मल्टीपर्पज), ऑफिसर स्केल-I/II/III भर्ती — ऑनलाइन आवेदन 1 से 21 सितंबर 2026 तक
+                    </div>
+                    <div class="meta">📍 हेड ऑफिस: 8A, IT पार्क, सहस्त्रधारा रोड, देहरादून | 📝 योग्यता: स्नातक (पद अनुसार)</div>
+                </div>
+                <div class="btn-col">
+                    <a href="https://www.ibps.in" target="_blank" class="btn btn-red">IBPS RRB आवेदन पोर्टल</a>
+                    <a href="https://ukgb.bank.in/additional/career.html" target="_blank" class="btn btn-gray">📄 UGB करियर / भर्ती पेज</a>
+                    <a href="https://ukgb.bank.in" target="_blank" class="btn btn-blue">UGB मुख्य वेबसाइट</a>
                 </div>
             </li>
         </ul>
@@ -487,6 +531,8 @@
         </ul>
     </div>
 
+    <div class="no-results" id="noResultsMsg">🔍 माफ़ कीजिए, आपकी खोज से मिलता-जुलता कोई विभाग/भर्ती/सेवा नहीं मिली। कृपया दूसरा शब्द ट्राई करें (जैसे: Police, Bijli, UGB, GDS, College)।</div>
+
     <div class="footer">
         <p class="blessing">🚩 "जय श्री राम 🙏 "</p>
     </div>
@@ -494,12 +540,51 @@
 
 <!-- ⚡ जावास्क्रिप्ट फ़िल्टर व सर्च इंजन -->
 <script>
+    /*
+      ===================================================================
+      📌 नई भर्ती जोड़ते समय "अंतिम तारीख" खुद-ब-खुद चेक होने के लिए तरीका:
+      ===================================================================
+      अगर किसी भर्ती की लास्ट डेट पता है, तो उसके tag वाले <div> में
+      class="tags tag-auto" लगाएं और ये 3 attribute जोड़ें:
+
+      data-lastdate="YYYY-MM-DD"           → भर्ती की अंतिम तारीख
+      data-active-text="....."              → जब तक तारीख नहीं निकली, यही टेक्स्ट दिखेगा
+      data-expired-text="....."             → तारीख निकलने के बाद यही टेक्स्ट खुद दिखने लगेगा
+
+      उदाहरण नीचे UGB (उत्तराखंड ग्रामीण बैंक) वाले कार्ड में है।
+      इससे हर बार जब कोई इंसान वेबसाइट खोलेगा, ब्राउज़र खुद आज की तारीख
+      से मुकाबला करके बता देगा कि भर्ती चालू है या तारीख निकल गई —
+      इसके लिए कोड में कुछ भी दोबारा बदलने की ज़रूरत नहीं पड़ेगी।
+
+      ⚠️ ध्यान रहे: यह सिस्टम सिर्फ उन भर्तियों का स्टेटस (चालू/बंद) खुद
+      अपडेट करता है जो पहले से लिस्ट में मौजूद हैं। बिल्कुल नई भर्ती
+      (जो अभी लिस्ट में नहीं है) अपने आप नहीं जुड़ेगी — वो हर बार
+      मैन्युअली नया <li> कार्ड बनाकर ही जोड़नी होगी।
+    */
+    function autoUpdateDeadlineStatus() {
+        var today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        document.querySelectorAll('.tag-auto[data-lastdate]').forEach(function (tagEl) {
+            var deadline = new Date(tagEl.getAttribute('data-lastdate') + 'T23:59:59');
+            var isExpired = today > deadline;
+
+            tagEl.textContent = isExpired
+                ? tagEl.getAttribute('data-expired-text')
+                : tagEl.getAttribute('data-active-text');
+
+            tagEl.classList.remove('tag-active', 'tag-notice', 'tag-update');
+            tagEl.classList.add(isExpired ? 'tag-notice' : 'tag-active');
+        });
+    }
+
     function showCategory(categoryId, btnElement) {
         var buttons = document.querySelectorAll('.tab-btn');
         buttons.forEach(function(b) { b.classList.remove('active'); });
         btnElement.classList.add('active');
 
         document.getElementById('searchInput').value = '';
+        document.getElementById('noResultsMsg').style.display = 'none';
 
         var blocks = document.querySelectorAll('.category-block');
         if (categoryId === 'all') {
@@ -514,9 +599,11 @@
     }
 
     function filterContent() {
-        var input = document.getElementById('searchInput').value.toLowerCase();
+        var input = document.getElementById('searchInput').value.toLowerCase().trim();
         var blocks = document.querySelectorAll('.category-block');
         var items = document.querySelectorAll('li.item-card');
+        var noResultsMsg = document.getElementById('noResultsMsg');
+        var visibleCount = 0;
 
         blocks.forEach(function(b) { b.style.display = 'block'; });
 
@@ -524,18 +611,80 @@
             var text = item.textContent.toLowerCase();
             if (text.includes(input)) {
                 item.style.display = 'flex';
+                visibleCount++;
             } else {
                 item.style.display = 'none';
             }
         });
 
-        if (input.trim() === '') {
+        noResultsMsg.style.display = (input !== '' && visibleCount === 0) ? 'block' : 'none';
+
+        if (input === '') {
             var activeTab = document.querySelector('.tab-btn.active');
             if (activeTab) {
                 activeTab.click();
             }
         }
     }
+
+    // पेज खुलते ही तारीख-आधारित स्टेटस खुद चेक हो जाए
+    document.addEventListener('DOMContentLoaded', autoUpdateDeadlineStatus);
+
+    /*
+      ===================================================================
+      🔔 लाइव न्यूज़ टिकर — यह सेक्शन सच में "अपने आप" अपडेट होता है।
+      ===================================================================
+      यह Google News की RSS फ़ीड से "उत्तराखंड सरकारी भर्ती" खोजकर
+      ताज़ा 6 खबरें दिखाता है। जब भी कोई नई खबर गूगल न्यूज़ पर आएगी,
+      वो अपने आप यहाँ दिख जाएगी — कोड में कुछ भी बदलने की ज़रूरत नहीं।
+
+      ⚠️ ईमानदारी से समझ लें — इसकी 2 सीमाएं हैं:
+      1) ये सिर्फ "समाचार खबरें" दिखाता है, ऊपर वाली लिस्ट जैसे साफ-सुथरे
+         डिपार्टमेंट कार्ड (लिंक, योग्यता, टैग) नहीं बना सकता।
+      2) कभी-कभी खोज में उत्तराखंड से जुड़ी असंबंधित खबर भी आ सकती है,
+         तो खबर पर क्लिक करके खुद जांच लें कि वो सही और नई है या नहीं।
+      3) यह एक फ्री थर्ड-पार्टी सर्विस (rss2json.com) से डेटा लाता है,
+         अगर वो सर्विस कभी डाउन हो तो नीचे एक सीधा गूगल न्यूज़ लिंक
+         दिखा दिया जाएगा ताकि यूज़र फिर भी खबर देख सके।
+    */
+    function loadLiveNews() {
+        // हर टर्म में "उत्तराखंड"/"Uttarakhand" शब्द ज़रूरी (quotes में) रखा है,
+        // ताकि Bihar/UP/Rajasthan जैसी दूसरे राज्यों की मिलती-जुलती खबरें
+        // (जैसे "Gramin Bank recruitment" के नाम पर) गलती से न आ जाएं।
+        var newsQuery = '"उत्तराखंड भर्ती" OR "उत्तराखंड सरकारी नौकरी" OR "उत्तराखंड बैंक भर्ती" OR "Uttarakhand Gramin Bank" OR "Uttarakhand government recruitment"';
+        var googleNewsRSS = 'https://news.google.com/rss/search?q=' + encodeURIComponent(newsQuery) + '&hl=hi-IN&gl=IN&ceid=IN:hi';
+        var proxyUrl = 'https://api.rss2json.com/v1/api.json?rss_url=' + encodeURIComponent(googleNewsRSS);
+        var listEl = document.getElementById('liveNewsList');
+        var directSearchLink = 'https://news.google.com/search?q=' + encodeURIComponent(newsQuery) + '&hl=hi-IN&gl=IN';
+
+        fetch(proxyUrl)
+            .then(function (res) { return res.json(); })
+            .then(function (data) {
+                if (!data.items || data.items.length === 0) { throw new Error('no items'); }
+
+                // डबल-सेफ्टी: सिर्फ वही खबर रखें जिसके टाइटल/डिस्क्रिप्शन में
+                // "उत्तराखंड" या "Uttarakhand" शब्द हो — बाकी राज्यों की खबर छांट दें
+                var ukItems = data.items.filter(function (item) {
+                    var text = ((item.title || '') + ' ' + (item.description || '')).toLowerCase();
+                    return text.includes('उत्तराखंड') || text.includes('uttarakhand');
+                });
+
+                if (ukItems.length === 0) { throw new Error('no relevant items'); }
+
+                listEl.innerHTML = '';
+                ukItems.slice(0, 6).forEach(function (item) {
+                    var li = document.createElement('li');
+                    var pubDate = item.pubDate ? new Date(item.pubDate).toLocaleDateString('hi-IN', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+                    li.innerHTML = '📰 <a href="' + item.link + '" target="_blank">' + item.title + '</a>' +
+                        (pubDate ? '<div class="live-news-meta">🗞️ ' + pubDate + '</div>' : '');
+                    listEl.appendChild(li);
+                });
+            })
+            .catch(function () {
+                listEl.innerHTML = '<li class="live-news-fallback">⚠️ अभी लाइव खबरें लोड नहीं हो पाईं। <a href="' + directSearchLink + '" target="_blank">यहाँ क्लिक करके सीधे Google News पर देखें</a></li>';
+            });
+    }
+    document.addEventListener('DOMContentLoaded', loadLiveNews);
 </script>
 
 </body>
